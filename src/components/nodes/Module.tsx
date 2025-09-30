@@ -13,6 +13,7 @@ export type ModuleNodeData = {
 export type ModuleNodeType = Node<ModuleNodeData>
 
 export default function ModuleNode(props: NodeProps<ModuleNodeType>) {
+    console.log("Rendering node:", props.data.id, props.data.label);
     return (
         <div className="module-container">
             <div className="module-name">{props.data.name}</div>
