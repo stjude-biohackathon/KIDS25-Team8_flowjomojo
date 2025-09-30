@@ -7,13 +7,13 @@ export default function NodesAndEdges () {
         <div className="sidebar-content">
             <div className="sidebar-header">Modules and Dependencies</div>
             <div className="sidebar-subsection">
-                <div>Modules Format</div>
+                <div>Modules format</div>
                 <div className="modules-format-container">
                     
                 </div>
             </div>
             <div className="sidebar-subsection">
-                <div>Module Editor</div>
+                <div>Module editor</div>
                 <div className="modules-editor-container">
 
                 </div>

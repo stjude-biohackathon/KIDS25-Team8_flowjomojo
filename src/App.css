@@ -9,7 +9,7 @@
   height: 3.5rem;
   align-items: center;
   justify-content: space-between;
-  background-color: #f9fafb;
+  background-color: transparent;
   border-bottom: 1px solid #e5e7eb;
   padding: 0 1rem;
 }
@@ -34,16 +34,29 @@
 }
 
 .searchbar-container {
+  width: 100%;
   display: flex;
+  align-items: center;
   justify-content: center;
   padding: 0.5rem 0;
-  border-bottom: 1px solid #e5e7eb;
-  background-color: white;
+  background-color: transparent;
 }
 
-.searchbar-inner {
-  width: 100%;
-  max-width: 28rem;
+.searchbar-box {
+  margin: 0 auto;
+  height: 40px;
+  display: flex;
+  width: 80%;
+  align-items: center;
+  border-radius: 20px;
+  border: 2px solid black;
+}
+
+.searchbar-message {
+  padding: 0.5rem 1rem;
+  font-style: italic;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .editor-container {
@@ -90,9 +103,7 @@
 
 .topbar-btn {
   padding: 0.25rem 0.75rem;
-  border: 1px solid #d1d5db;
   border-radius: 6px;
-  background-color: white;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
@@ -132,4 +143,9 @@
 .sidebar-icon {
   width: 10px;
   object-fit: cover;
+}
+
+.sidebar-header {
+  font-weight: bold;
+  padding-bottom: 8px;
 }

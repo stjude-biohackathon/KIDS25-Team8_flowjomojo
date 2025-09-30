@@ -1,11 +1,21 @@
-import React, { useState } from "react";
-import { ReactFlowProvider, ReactFlow, Background, useStore } from "@xyflow/react";
+import React, { useState, useEffect } from "react";
+import { ReactFlowProvider, Background } from "@xyflow/react";
+import FlowEditor from './components/Flow'
 import Sidebar from './components/Sidebar';
 import SearchBar from './components/SearchBar';
 import TopBar from './components/TopBar';
 import './App.css';
+import { type ModuleNodeType } from "./components/nodes/Module";
+import { retrieveModules } from "./utils/retrieveModules";
+import { shallow } from 'zustand/shallow';
+import { useStore } from './utils/store';
 
 const App = () => {
+    const [nodes, setNodes ] = useState<ModuleNodeType[]>([]);
+
+    useEffect(() => {
+        retrieveModules().then(setNodes);
+    }, []);
 
     return (
         <div className="app-container">
@@ -15,14 +25,10 @@ const App = () => {
             <div className="app-body">
                 <Sidebar />
                 <main className="app-main">
-                    <div className="searchbar-container">
-                        <div className="searchbar-inner">
-                            <SearchBar />
-                        </div>
-                    </div>
+                    <SearchBar />
                     <div className="editor-container">
                         <ReactFlowProvider>
-                            <ReactFlow />
+                            <FlowEditor />
                             <Background />
                         </ReactFlowProvider>
                     </div>

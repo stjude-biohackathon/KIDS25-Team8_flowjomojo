@@ -1,33 +1,22 @@
-import React, { memo } from 'react';
-import { Handle, Position } from '@xyflow/react';
+import React, { useState } from 'react';
+import { type NodeProps, type Node } from '@xyflow/react';
 
-interface ModuleType {
-    data: any,
-    isConnectable: boolean
+export type ModuleNodeData = {
+    id: string,
+    name: string,
+    label?: string,
+    selected: boolean,
+    inputs: Record<string, any>,
+    outputs?: Record<string, any>
 }
-export default memo(({ data, isConnectable }: ModuleType) => {
+
+export type ModuleNodeType = Node<ModuleNodeData>
+
+export default function ModuleNode(props: NodeProps<ModuleNodeType>) {
     return (
-        <>
-            <Handle
-                type="target"
-                position={Position.Left}
-                onConnect={(params) => console.log('handle onConnect', params )}
-                isConnectable={isConnectable}
-            />
-            <div>
-                <strong>{data.name}</strong>
-            </div>
-            <input
-                className="nodrag"
-                type="color"
-                onChange={data.onChange}
-                defaultValue={data.color}
-            />
-            <Handle
-                type="source"
-                position={Position.Right}
-                isConnectable={isConnectable}
-            />
-        </>
-    );
-});
+        <div className="module-container">
+            <div className="module-name">{props.data.name}</div>
+            <div className="module-content"></div>
+        </div>
+    )
+}
