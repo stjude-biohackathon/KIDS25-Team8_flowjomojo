@@ -17,16 +17,16 @@ const App = () => {
                 <TopBar />
             </header>
             <div className="app-body">
-                <Sidebar />
-                <main className="app-main">
-                    <SearchBar />
-                    <div className="editor-container">
-                        <ReactFlowProvider>
-                            <FlowEditor />
-                            <Background />
-                        </ReactFlowProvider>
-                    </div>
-                </main>
+                <ReactFlowProvider>
+                    <Sidebar />
+                    <main className="app-main">
+                        <SearchBar />
+                            <div className="editor-container">
+                                <FlowEditor />
+                                <Background />
+                            </div>
+                    </main>
+                </ReactFlowProvider>
             </div>
         </div>
     );

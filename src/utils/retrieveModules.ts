@@ -17,8 +17,6 @@ export async function retrieveModules(): Promise<ModuleNodeType[]> {
 
     const parsed: CommandsFile = await res.json()
 
-    // console.log(parsed.modules)
-
     return parsed.modules.map(module => ({
         id: module.id,
         types: "moduleNode",

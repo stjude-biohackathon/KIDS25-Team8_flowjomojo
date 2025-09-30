@@ -7,13 +7,15 @@ export type ModuleNodeData = {
     label?: string,
     selected: boolean,
     inputs: Record<string, any>,
-    outputs?: Record<string, any>
+    outputs?: Record<string, any>,
+    commands: string,
 }
 
 export type ModuleNodeType = Node<ModuleNodeData>
 
 export default function ModuleNode(props: NodeProps<ModuleNodeType>) {
-    console.log("Rendering node:", props.data.id, props.data.label);
+    const [ module, setActiveModules ] = useState()
+
     return (
         <div className="module-container">
             <div className="module-name">{props.data.name}</div>

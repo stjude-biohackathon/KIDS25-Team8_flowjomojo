@@ -1,12 +1,57 @@
+import { useState, useEffect } from 'react';
+import { type ModuleNodeType } from '../components/nodes/Module';
+import { retrieveModules } from "../utils/retrieveModules";
+
+type ModuleItemProps = {
+    data: ModuleNodeType['data'];
+    isSearch?: boolean;
+};
+
+function ModuleItem({ data, isSearch }: ModuleItemProps) {
+    const [ selected, setSelected ] = useState(false);
+
+    return (
+        <div className={`module-item${selected ? '-active' : ''}`} 
+            style={{ display: isSearch ? 'flex' : 'none' }}
+            onClick={()=> setSelected(!selected)} >
+            <p>{data.name}</p>
+            <small>{data.label}</small>
+        </div>
+    );
+}
+
 export default function SearchBar() {
+    const [ modules, setModules ] = useState<ModuleNodeType[]>([]);
+    const [ search, setSearch ] = useState('');
+
+    useEffect(() => {
+        retrieveModules().then( setModules );
+    }, []);
+
+    const filteredModules = modules.filter(module =>
+        module.data.name.toLowerCase().includes(search.toLowerCase())
+    );
+
     return (
         <div className="searchbar-container">
             <div className="searchbar-box">
-                <p className="searchbar-message">
-                    Search packages or modules....
-                </p>
+                <input 
+                    className="searchbar-message"
+                    placeholder="Search packages or modules...."
+                    value={search}
+                    onChange={e => setSearch(e.target.value)}
+                    type="text"
+                />
             </div>
-            <div className="searchbar-result"></div>
+            <div className="searchbar-result" style={{ display: search ? 'grid' : 'none'}}>
+                {filteredModules.length > 0 ? (
+                    filteredModules.map(module => (
+                        <ModuleItem key={module.id} data={module.data} isSearch={!!search}/>
+                    ))
+                ) : (
+                    <p>No results found.</p>
+                )}
+            </div>
         </div>
     )
 }
