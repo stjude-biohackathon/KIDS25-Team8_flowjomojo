@@ -1,5 +1,5 @@
 import React from 'react';
-import { type NodeProps, type Node, NodeResizer } from '@xyflow/react';
+import { type NodeProps, type Node, Handle, Position, NodeResizer, NodeToolbar } from '@xyflow/react';
 
 export type ModuleNodeData = {
     name: string,
@@ -15,11 +15,23 @@ export type ModuleNodeType = Node<ModuleNodeData, 'module'>
 
 export default function ModuleNode(props: NodeProps<ModuleNodeType>) {
     return (
-        <div className="module-container">
-            <div className="module-name">
-                {props.data.name}</div> 
-            <div className='module-description'>
-                {props.data?.description}</div>
-        </div>
+        <>  
+            { props.selected &&
+                <NodeResizer minWidth={100} minHeight={30} 
+                    color="#ff0071"
+                    lineClassName="border border-dashed border-gray-400"
+                    handleClassName="w-2 h-2 bg-gray-600 rounded"
+                />
+            }
+            <Handle type="target" position={Position.Top} />
+            <div className="module-container">
+                <div className="module-name">
+                    {props.data.name}</div> 
+                <div className='module-description'>
+                    {props.data?.description}</div>
+            </div>
+            <Handle type="source" position={Position.Bottom} />
+        </>
+        
     )
 }

@@ -59,6 +59,8 @@ export default function FlowEditor() {
         [screenToFlowPosition, dragModule],
     )
 
+    const defaultEdgeOptions = { style: { stroke: '#333', strokeWidth: 1 }}
+
     return (
         <ReactFlow
             nodes={nodes}
@@ -69,7 +71,9 @@ export default function FlowEditor() {
             onConnect={onConnect}
             onDragOver={onDragOver}
             onDrop={onDrop}
+            // onNodeDoubleClick={}
             preventScrolling={false}
+            defaultEdgeOptions={defaultEdgeOptions}
         />
     )
 }
