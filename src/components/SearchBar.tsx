@@ -31,7 +31,7 @@ function ModuleItem({ data, isSearch }: ModuleItemProps) {
             onClick={handleClick} 
         >
             <p>{data?.name}</p>
-            <small>{data?.label}</small>
+            <small>{data?.description}</small>
         </div>
     );
 }
