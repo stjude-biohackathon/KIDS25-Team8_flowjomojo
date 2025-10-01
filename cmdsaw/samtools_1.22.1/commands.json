@@ -1,83 +1,270 @@
-{   "modules": [
+{
+  "modules": [
     {
-        "id": "samtools_view",
-        "name": "SAMTOOLS_VIEW",
-        "label": "process_low",
-        "description": "function to view BAM/SAM/CRAM files",
-        "inputs": [
-            {   "name": "alignment",
-                "suffix" : ".bam",
-                "edam": "data_1383",
-                "optional": false
-            },
-            {
-                "name": "reference",
-                "suffix": ".fasta",
-                "edam": "format_1929",
-                "optional": true
-            }
-        ], 
-        "outputs": [
-            {
-                "name": "bam",
-                "suffix": ".bam",
-                "edam": "format_2572",
-                "optional": true
-            },
-            {
-                "name": "sam",
-                "suffix": ".sam",
-                "edam": "format_2573",
-                "optional": true
-            }
-        ],
-        "commands": "samtools view --threads ${task.cpus} ${reference} ${readnames} $args -o ${output_file} $input $args2"
+      "id": "samtools_view",
+      "name": "SAMTOOLS_VIEW",
+      "label": "process_low",
+      "description": "function to view BAM/SAM/CRAM files",
+      "inputs": [
+        {
+          "name": "alignment",
+          "suffix": ".bam",
+          "edam": "data_1383",
+          "optional": false
+        },
+        {
+          "name": "reference",
+          "suffix": ".fasta",
+          "edam": "format_1929",
+          "optional": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "bam",
+          "suffix": ".bam",
+          "edam": "format_2572",
+          "optional": true
+        },
+        {
+          "name": "sam",
+          "suffix": ".sam",
+          "edam": "format_2573",
+          "optional": true
+        }
+      ],
+      "commands": "samtools view --threads ${task.cpus} ${reference} ${readnames} $args -o ${output_file} $input $args2"
     },
     {
-        "id": "samtools_index",
-        "name": "SAMTOOLS_INDEX",
-        "label": "process_low",
-        "description": "Function to index BAM files",
-        "inputs": [
-            {
-            "name": "bam",
-            "suffix": ".bam",
-            "edam": "format_2572",
-            "optional": false
-            }
-        ],
-        "outputs": [
-            {
-            "name": "bai",
-            "suffix": ".bai",
-            "edam": "format_2573",
-            "optional": false
-            }
-        ],
-        "commands": "samtools index $input -o ${output_file}"
+      "id": "samtools_index",
+      "name": "SAMTOOLS_INDEX",
+      "label": "process_low",
+      "description": "Function to index BAM files",
+      "inputs": [
+        {
+          "name": "bam",
+          "suffix": ".bam",
+          "edam": "format_2572",
+          "optional": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "bai",
+          "suffix": ".bai",
+          "edam": "format_2573",
+          "optional": false
+        }
+      ],
+      "commands": "samtools index $input -o ${output_file}"
     },
     {
-        "id": "fastqc",
-        "name": "FASTQC",
-        "label": "process_low",
-        "description": "Quality control of FASTQ files using FastQC",
-        "inputs": [
-            {
-            "name": "fastq",
-            "suffix": ".fastq",
-            "edam": "format_1930",
-            "optional": false
-            }
-        ],
-        "outputs": [
-            {
-            "name": "report",
-            "suffix": "_fastqc.html",
-            "edam": "format_3873",
-            "optional": false
-            }
-        ],
-        "commands": "fastqc $input -o ${output_dir}"
+      "id": "fastqc",
+      "name": "FASTQC",
+      "label": "process_low",
+      "description": "Quality control of FASTQ files using FastQC",
+      "inputs": [
+        {
+          "name": "fastq",
+          "suffix": ".fastq",
+          "edam": "format_1930",
+          "optional": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "report",
+          "suffix": "_fastqc.html",
+          "edam": "format_3873",
+          "optional": false
+        }
+      ],
+      "commands": "fastqc $input -o ${output_dir}"
+    },
+    {
+      "id": "bedtools_intersect",
+      "name": "BEDTOOLS_INTERSECT",
+      "label": "process_low",
+      "description": "Find overlapping intervals between two BED/BAM/VCF/GFF files",
+      "inputs": [
+        {
+          "name": "intervals_a",
+          "suffix": ".bed",
+          "edam": "format_3003",
+          "optional": false
+        },
+        {
+          "name": "intervals_b",
+          "suffix": ".bed",
+          "edam": "format_3003",
+          "optional": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "bed",
+          "suffix": ".bed",
+          "edam": "format_3003",
+          "optional": false
+        }
+      ],
+      "commands": "bedtools intersect -a $intervals_a -b $intervals_b $args > ${output_file}"
+    },
+    {
+      "id": "bedtools_sort",
+      "name": "BEDTOOLS_SORT",
+      "label": "process_low",
+      "description": "Sort BED/GFF/VCF files by chromosome and position",
+      "inputs": [
+        {
+          "name": "intervals",
+          "suffix": ".bed",
+          "edam": "format_3003",
+          "optional": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "sorted",
+          "suffix": ".bed",
+          "edam": "format_3003",
+          "optional": false
+        }
+      ],
+      "commands": "bedtools sort -i $input $args > ${output_file}"
+    },
+    {
+      "id": "bedtools_merge",
+      "name": "BEDTOOLS_MERGE",
+      "label": "process_low",
+      "description": "Merge overlapping or adjacent intervals in a BED file",
+      "inputs": [
+        {
+          "name": "intervals",
+          "suffix": ".bed",
+          "edam": "format_3003",
+          "optional": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "merged",
+          "suffix": ".bed",
+          "edam": "format_3003",
+          "optional": false
+        }
+      ],
+      "commands": "bedtools merge -i $input $args > ${output_file}"
+    },
+    {
+      "id": "bedtools_genomecov",
+      "name": "BEDTOOLS_GENOMECOV",
+      "label": "process_low",
+      "description": "Compute genome coverage from BED/BAM files",
+      "inputs": [
+        {
+          "name": "intervals",
+          "suffix": ".bed",
+          "edam": "format_3003",
+          "optional": false
+        },
+        {
+          "name": "genome",
+          "suffix": ".genome",
+          "edam": "data_2340",
+          "optional": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "coverage",
+          "suffix": ".bedgraph",
+          "edam": "format_3583",
+          "optional": false
+        }
+      ],
+      "commands": "bedtools genomecov -i $intervals ${genome} $args > ${output_file}"
+    },
+    {
+      "id": "bedtools_subtract",
+      "name": "BEDTOOLS_SUBTRACT",
+      "label": "process_low",
+      "description": "Remove intervals in B from intervals in A",
+      "inputs": [
+        {
+          "name": "intervals_a",
+          "suffix": ".bed",
+          "edam": "format_3003",
+          "optional": false
+        },
+        {
+          "name": "intervals_b",
+          "suffix": ".bed",
+          "edam": "format_3003",
+          "optional": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "bed",
+          "suffix": ".bed",
+          "edam": "format_3003",
+          "optional": false
+        }
+      ],
+      "commands": "bedtools subtract -a $intervals_a -b $intervals_b $args > ${output_file}"
+    },
+    {
+      "id": "bedtools_bamtobed",
+      "name": "BEDTOOLS_BAMTOBED",
+      "label": "process_low",
+      "description": "Convert BAM alignments to BED format",
+      "inputs": [
+        {
+          "name": "bam",
+          "suffix": ".bam",
+          "edam": "format_2572",
+          "optional": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "bed",
+          "suffix": ".bed",
+          "edam": "format_3003",
+          "optional": false
+        }
+      ],
+      "commands": "bedtools bamtobed -i $input $args > ${output_file}"
+    },
+    {
+      "id": "bedtools_getfasta",
+      "name": "BEDTOOLS_GETFASTA",
+      "label": "process_low",
+      "description": "Extract sequences from a FASTA file based on BED intervals",
+      "inputs": [
+        {
+          "name": "intervals",
+          "suffix": ".bed",
+          "edam": "format_3003",
+          "optional": false
+        },
+        {
+          "name": "fasta",
+          "suffix": ".fasta",
+          "edam": "format_1929",
+          "optional": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "sequences",
+          "suffix": ".fasta",
+          "edam": "format_1929",
+          "optional": false
+        }
+      ],
+      "commands": "bedtools getfasta -fi $fasta -bed $intervals $args -fo ${output_file}"
     }
-    ]
+  ]
 }
