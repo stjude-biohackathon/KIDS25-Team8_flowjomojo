@@ -1,37 +1,83 @@
 {   "modules": [
     {
-            "id": "samtools_view",
-            "name": "SAMTOOLS_VIEW",
-            "label": "process_low",
-            "description": "function to view BAM/SAM/CRAM files",
-            "inputs": [
-                {   "name": "alignment",
-                    "suffix" : ".bam",
-                    "edam": "data_1383",
-                    "optional": false
-                },
-                {
-                    "name": "reference",
-                    "suffix": ".fasta",
-                    "edam": "format_1929",
-                    "optional": true
-                }
-            ], 
-            "outputs": [
-                {
-                    "name": "bam",
-                    "suffix": ".bam",
-                    "edam": "format_2572",
-                    "optional": true
-                },
-                {
-                    "name": "sam",
-                    "suffix": ".sam",
-                    "edam": "format_2573",
-                    "optional": true
-                }
-            ],
-            "commands": "samtools view --threads ${task.cpus} ${reference} ${readnames} $args -o ${output_file} $input $args2"
-        }
+        "id": "samtools_view",
+        "name": "SAMTOOLS_VIEW",
+        "label": "process_low",
+        "description": "function to view BAM/SAM/CRAM files",
+        "inputs": [
+            {   "name": "alignment",
+                "suffix" : ".bam",
+                "edam": "data_1383",
+                "optional": false
+            },
+            {
+                "name": "reference",
+                "suffix": ".fasta",
+                "edam": "format_1929",
+                "optional": true
+            }
+        ], 
+        "outputs": [
+            {
+                "name": "bam",
+                "suffix": ".bam",
+                "edam": "format_2572",
+                "optional": true
+            },
+            {
+                "name": "sam",
+                "suffix": ".sam",
+                "edam": "format_2573",
+                "optional": true
+            }
+        ],
+        "commands": "samtools view --threads ${task.cpus} ${reference} ${readnames} $args -o ${output_file} $input $args2"
+    },
+    {
+        "id": "samtools_index",
+        "name": "SAMTOOLS_INDEX",
+        "label": "process_low",
+        "description": "Function to index BAM files",
+        "inputs": [
+            {
+            "name": "bam",
+            "suffix": ".bam",
+            "edam": "format_2572",
+            "optional": false
+            }
+        ],
+        "outputs": [
+            {
+            "name": "bai",
+            "suffix": ".bai",
+            "edam": "format_2573",
+            "optional": false
+            }
+        ],
+        "commands": "samtools index $input -o ${output_file}"
+    },
+    {
+        "id": "fastqc",
+        "name": "FASTQC",
+        "label": "process_low",
+        "description": "Quality control of FASTQ files using FastQC",
+        "inputs": [
+            {
+            "name": "fastq",
+            "suffix": ".fastq",
+            "edam": "format_1930",
+            "optional": false
+            }
+        ],
+        "outputs": [
+            {
+            "name": "report",
+            "suffix": "_fastqc.html",
+            "edam": "format_3873",
+            "optional": false
+            }
+        ],
+        "commands": "fastqc $input -o ${output_dir}"
+    }
     ]
 }
