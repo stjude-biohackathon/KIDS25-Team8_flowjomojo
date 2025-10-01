@@ -1,0 +1,37 @@
+{   "modules": [
+    {
+            "id": "samtools_view",
+            "name": "SAMTOOLS_VIEW",
+            "label": "process_low",
+            "description": "function to view BAM/SAM/CRAM files",
+            "inputs": [
+                {   "name": "alignment",
+                    "suffix" : ".bam",
+                    "edam": "data_1383",
+                    "optional": false
+                },
+                {
+                    "name": "reference",
+                    "suffix": ".fasta",
+                    "edam": "format_1929",
+                    "optional": true
+                }
+            ], 
+            "outputs": [
+                {
+                    "name": "bam",
+                    "suffix": ".bam",
+                    "edam": "format_2572",
+                    "optional": true
+                },
+                {
+                    "name": "sam",
+                    "suffix": ".sam",
+                    "edam": "format_2573",
+                    "optional": true
+                }
+            ],
+            "commands": "samtools view --threads ${task.cpus} ${reference} ${readnames} $args -o ${output_file} $input $args2"
+        }
+    ]
+}
