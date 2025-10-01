@@ -1,5 +1,4 @@
-import React from 'react';
-import { type NodeProps, type Node, Handle, Position, NodeResizer, NodeToolbar } from '@xyflow/react';
+import { type NodeProps, type Node, Handle, Position, NodeResizer } from '@xyflow/react';
 
 export type ModuleNodeData = {
     name: string,

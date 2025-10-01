@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ModulesLibrary from './ModulesLibrary.tsx';
 import NodesAndEdges from './NodesAndEdges.tsx';
 import ShareOptions from './ShareOptions.tsx';

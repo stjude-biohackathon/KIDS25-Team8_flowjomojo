@@ -1,12 +1,9 @@
-import React, { useCallback } from 'react';
-import { useReactFlow } from '@xyflow/react';
+import React from 'react';
+// import { useReactFlow } from '@xyflow/react';
 import { useDnD, type DragModule } from '../hooks/DnDContext';
 
-let id = 0;
-const getId = () => `dndnode_${id++}`;
-
 export default function ModulesLibrary () {
-    const { dragModule, setDragModule, sidebarModules } = useDnD();
+    const { dragModule: _dragModule, setDragModule, sidebarModules } = useDnD();
 
     const onDragStart = (event: React.DragEvent<HTMLDivElement>, module: DragModule) => {
         if (!module) return;
