@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { type NodeProps, type Node } from '@xyflow/react';
 
 export type ModuleNodeData = {
-    id: string,
     name: string,
     label?: string,
-    selected: boolean,
+    selected?: boolean,
     inputs: Record<string, any>,
     outputs?: Record<string, any>,
-    commands: string,
+    commands: string
 }
 
-export type ModuleNodeType = Node<ModuleNodeData>
+export type ModuleNodeType = Node<ModuleNodeData, 'module'>
 
 export default function ModuleNode(props: NodeProps<ModuleNodeType>) {
     return (

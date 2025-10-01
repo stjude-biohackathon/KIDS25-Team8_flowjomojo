@@ -17,11 +17,11 @@ function ModuleItem({ data, isSearch }: ModuleItemProps) {
         setSelected(!selected);
 
         if (!selected) {
-            if (!sidebarModules.find((m) => m?.id === data.id)) {
+            if (!sidebarModules.find((m) => m?.name === data.name)) {
               setSidebarModules([...sidebarModules, data]);
             }
           } else {
-            setSidebarModules(sidebarModules.filter((m) => m?.id !== data.id));
+            setSidebarModules(sidebarModules.filter((m) => m?.name !== data.name));
           }
     }
 

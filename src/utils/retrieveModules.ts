@@ -19,10 +19,9 @@ export async function retrieveModules(): Promise<ModuleNodeType[]> {
 
     return parsed.modules.map(module => ({
         id: module.id,
-        types: "moduleNode",
+        type: "module",
         position: { x: 0, y: 0},
         data: {
-            id: module.id,
             name: module.name,
             label: module.label,
             selected: false,

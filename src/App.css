@@ -187,3 +187,15 @@
   font-weight: bold;
   padding-bottom: 8px;
 }
+
+.library-item {
+  border: 1px solid black;
+  border-radius: 8px;
+  font-size: 12px;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0;
+  width: 50%;
+}
