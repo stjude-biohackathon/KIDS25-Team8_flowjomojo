@@ -3,21 +3,33 @@
 
 Flowjomojo is a ReactFlow-based web-app that generates ready-made Nextflow/WDL pipelines from drag-and-drop modules. It helps easing the process of writing bioinformatics pipelines, provide configuration settings and visualization of workflows.
 
+
 ## Quick Start
 ### 1. Searching available modules
+Modules can be searched using the main search bar.
 
+![step 1](/src/assets/step1.png)
 
 ### 2. Select / Drag and Drop modules to canvas
+Then we can select / unselect modules to be used. Selected modules will appear under modules library section.
+They can then be dragged and dropped to the main canvas.
 
+![step 2](/src/assets/step2.png)
 
 ### 3. Build connection
+By default, the Top Handle of a Module Node is the target, and the Bottom Handle is the source. Connect source to target to create a connection between modules.
 
+![step 3](/src/assets/step3.png)
 
 ### 4. Module editor
+Module's attributes can be changed in the Modules & Dependencies section.
+
+![step 4](/src/assets/step4.png)
+
 
 ## Adding modules to Flowjomojo
 ### commands location
-Currently we are storing our discovered commands from [cmdsaw]() in `public/cmdsaw/samtools_1.22.1` as commands.json files. For testing purpose, it's better to add modules as json elements to this file. In the future, there will be designated locations to retrieve these commands.
+Currently we are storing our discovered commands from [cmdsaw](https://github.com/stjude-biohackathon/KIDS25-Team8_cmdsaw) in `public/cmdsaw/samtools_1.22.1` as commands.json files. For testing purpose, it's better to add modules as elements to this file. In the future, there will be designated locations to retrieve these commands in the future.
 
 ### commands JSON format
 Our current (subject to changes) commands.json ahere to the following structure:
@@ -61,3 +73,6 @@ Our current (subject to changes) commands.json ahere to the following structure:
 **Export pipelines:** Generate Nextflow or WDL scripts from your designed workflow.
 
 **Responsive interface:** Works entirely in the browser without backend setup.
+
+
+**Under development for the St. Jude Biohackathon 2025**

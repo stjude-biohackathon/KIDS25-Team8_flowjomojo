@@ -1,7 +1,8 @@
 // import React from 'react';
-import { NodeToolbar, Position, useNodesState } from '@xyflow/react'
-import { useCallback, useState, useEffect } from 'react';
-import { useDnD } from '../hooks/DnDContext.tsx';
+// import { NodeToolbar, Position, useNodesState } from '@xyflow/react'
+// import { useCallback, useState, useEffect } from 'react';
+// import { useDnD } from '../hooks/DnDContext.tsx';
+import { useState } from 'react';
 import { useReactFlow } from '@xyflow/react';
 import { type ModuleNodeType } from './nodes/Module.tsx';
 
