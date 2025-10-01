@@ -3,7 +3,8 @@ import { createContext, useContext, useState } from "react";
 export type DragModule = {
     name: string,
     label?: string,
-    selected?: boolean
+    selected?: boolean,
+    description?: string,
     inputs: Record<string, any>;
     outputs?: Record<string, any>;
     commands: string;

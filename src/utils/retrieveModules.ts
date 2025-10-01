@@ -5,6 +5,7 @@ type CommandsFile = {
         id: string,
         name: string,
         label?: string, 
+        description?: string,
         inputs: Record<string, any>,
         outputs?: Record<string, any>,
         commands: string,
@@ -25,6 +26,7 @@ export async function retrieveModules(): Promise<ModuleNodeType[]> {
             name: module.name,
             label: module.label,
             selected: false,
+            description: module.description,
             inputs: module.inputs,
             outputs: module.outputs ?? {},
             commands: module.commands

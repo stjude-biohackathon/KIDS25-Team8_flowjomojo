@@ -7,7 +7,6 @@ const getId = () => `dndnode_${id++}`;
 
 export default function ModulesLibrary () {
     const { dragModule, setDragModule, sidebarModules } = useDnD();
-    const { screenToFlowPosition } = useReactFlow();
 
     const onDragStart = (event: React.DragEvent<HTMLDivElement>, module: DragModule) => {
         if (!module) return;
@@ -15,33 +14,7 @@ export default function ModulesLibrary () {
         event.dataTransfer.setData("application/reactflow", JSON.stringify(module));
         event.dataTransfer.effectAllowed = "move";
     };
-
-    const onDragOver = useCallback((event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault();
-        event.dataTransfer.dropEffect = 'move';
-    }, []);
-
-    const onDrop = useCallback(
-        (event: React.DragEvent<HTMLDivElement>) => { 
-            event.preventDefault();
-            if (!dragModule) {
-                return
-            };
-            const position = screenToFlowPosition({
-                x: event.clientX,
-                y: event.clientY,
-            });
-            const newNode: = {
-                id: getId(),
-                type: "module", 
-                position,
-                data: dragModule,
-            };
-            setNodes((nds) => nds.concat(newNode));
-        },
-        [screenToFlowPosition, dragModule]
-    );
-
+    
     return (
         <div className="sidebar-content">
             <div className="sidebar-header">Modules Library</div>

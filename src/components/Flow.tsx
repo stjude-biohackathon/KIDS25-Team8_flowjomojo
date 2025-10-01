@@ -5,7 +5,7 @@ import ModuleNode, { type ModuleNodeType } from './nodes/Module.tsx';
 import { useDnD } from '../hooks/DnDContext.tsx';
 
 const nodeTypes = {
-    moduleNode: ModuleNode
+    module: ModuleNode
 };
 
 let id = 0;
@@ -16,6 +16,8 @@ export default function FlowEditor() {
     const { dragModule } = useDnD();
     const [nodes, setNodes ] = useState<Node[]>([]);
     const [edges, setEdges ] = useState<Edge[]>([]);
+
+    console.log( dragModule )
 
     const onNodesChange: OnNodesChange = useCallback(
         (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -46,17 +48,17 @@ export default function FlowEditor() {
                 x: event.clientX,
                 y: event.clientY,
             });
-            const newNode = {
+            const newNode: ModuleNodeType = {
                 id: getId(),
                 type: 'module',
                 position,
-                data: { label: `${dragModule} node` },
+                data: dragModule,
             };
             setNodes((nds) => nds.concat(newNode));
         },
         [screenToFlowPosition, dragModule],
     )
-    // const { dragModule, setDragModule } = useDnD();
+
     return (
         <ReactFlow
             nodes={nodes}
@@ -67,7 +69,6 @@ export default function FlowEditor() {
             onConnect={onConnect}
             onDragOver={onDragOver}
             onDrop={onDrop}
-            fitView
             preventScrolling={false}
         />
     )

@@ -3,6 +3,7 @@
             "id": "samtools_view",
             "name": "SAMTOOLS_VIEW",
             "label": "process_low",
+            "description": "function to view BAM/SAM/CRAM files",
             "inputs": [
                 {   "name": "alignment",
                     "suffix" : ".bam",
