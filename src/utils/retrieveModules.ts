@@ -13,7 +13,7 @@ type CommandsFile = {
 };
 
 export async function retrieveModules(): Promise<ModuleNodeType[]> {
-    const res = await fetch("/cmdsaw/samtools_1.22.1/commands.json");
+    const res = await fetch(import.meta.env.BASE_URL + "/cmdsaw/samtools_1.22.1/commands.json");
     if (!res.ok) throw new Error("Failed to fetch commands.json");
 
     const parsed: CommandsFile = await res.json()

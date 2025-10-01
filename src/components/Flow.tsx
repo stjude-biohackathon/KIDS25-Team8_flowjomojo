@@ -9,13 +9,13 @@ const nodeTypes = {
 };
 
 let id = 0;
-const getId = () => `dndnode_${id++}`;
+const getId = () => `node_${id++}`;
 
 export default function FlowEditor() {
     const { screenToFlowPosition } = useReactFlow();
     const { dragModule } = useDnD();
-    const [nodes, setNodes ] = useState<Node[]>([]);
-    const [edges, setEdges ] = useState<Edge[]>([]);
+    const [ nodes, setNodes ] = useState<Node[]>([]);
+    const [ edges, setEdges ] = useState<Edge[]>([]);
 
     console.log( dragModule )
 
@@ -58,7 +58,11 @@ export default function FlowEditor() {
         },
         [screenToFlowPosition, dragModule],
     )
-
+    // check on this later
+    // const onNodeDoubleClick = useCallback(
+    //     (event: React.MouseEvent<HTMLDivElement>) => {},
+    //     []
+    // )
     const defaultEdgeOptions = { style: { stroke: '#333', strokeWidth: 1 }}
 
     return (
