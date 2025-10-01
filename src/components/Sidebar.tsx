@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
-import { useNodes } from '@xyflow/react';
 import ModulesLibrary from './ModulesLibrary.tsx';
 import NodesAndEdges from './NodesAndEdges.tsx';
 import ShareOptions from './ShareOptions.tsx';
-
 import library from '../assets/library.png';
-import nodes from '../assets/nodes.png';
+import nodes_img from '../assets/nodes.png';
 import share from '../assets/share.png';
 
-// type SidebarContext = {
-//     state: "expanded" | "collapsed";
-//     open: "boolean";
-//     active_panel: "modules-library" | "nodes-and-edges" | "share-options"
-// }
 type ActivePanel = "modules-library" | "nodes-and-edges" | "share-options"
 
 export default function Sidebar() {
@@ -25,7 +18,7 @@ export default function Sidebar() {
                     <img src={library} alt="library" className="sidebar-icon"></img>
                 </button>
                 <button onClick={() => setActive("nodes-and-edges")}>
-                    <img src={nodes} alt="nodes" className="sidebar-icon"></img>
+                    <img src={nodes_img} alt="nodes" className="sidebar-icon"></img>
                 </button>
                 <button onClick={() => setActive("share-options")}>
                     <img src={share} alt="share" className="sidebar-icon"></img>

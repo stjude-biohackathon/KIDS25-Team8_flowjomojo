@@ -1,19 +1,36 @@
 import { createContext, useContext, useState } from "react";
 
-const DnDContext = createContext([null, (_) => {}]);
+export type DragModule = {
+    id: string,
+    name: string,
+    label?: string,
+    inputs: Record<string, any>;
+    outputs?: Record<string, any>;
+    commands: string;
+} | null;
 
-export const DnDProvider = ({ children: any }) => {
-    const [type, setType] = useState(null);
+type DnDContextType = {
+    dragModule: DragModule;
+    setDragModule: (mod: DragModule) => void;
+    sidebarModules: DragModule[];
+    setSidebarModules: React.Dispatch<React.SetStateAction<DragModule[]>>;
+};
 
+const DnDContext = createContext<DnDContextType | undefined>(undefined);
+
+export const DnDProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const [dragModule, setDragModule] = useState<DragModule>(null);
+    const [sidebarModules, setSidebarModules] = useState<DragModule[]>([]);
+  
     return (
-        <DnDContext.Provider value={[type, setType]}>
-            {children}
-        </DnDContext.Provider>
+      <DnDContext.Provider value={{ dragModule, setDragModule, sidebarModules, setSidebarModules }}>
+        {children}
+      </DnDContext.Provider>
     );
-}
-
-export default DnDContext;
+};
 
 export const useDnD = () => {
-    return useContext(DnDContext);
+    const ctx = useContext(DnDContext);
+    if (!ctx) throw new Error("useDnD must be used inside DnDProvider");
+    return ctx;
 }

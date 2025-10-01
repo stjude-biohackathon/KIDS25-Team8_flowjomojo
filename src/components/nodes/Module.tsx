@@ -14,8 +14,6 @@ export type ModuleNodeData = {
 export type ModuleNodeType = Node<ModuleNodeData>
 
 export default function ModuleNode(props: NodeProps<ModuleNodeType>) {
-    const [ module, setActiveModules ] = useState()
-
     return (
         <div className="module-container">
             <div className="module-name">{props.data.name}</div>

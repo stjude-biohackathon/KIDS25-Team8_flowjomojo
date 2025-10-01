@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { type ModuleNodeType } from '../components/nodes/Module';
 import { retrieveModules } from "../utils/retrieveModules";
+import { useDnD } from '../hooks/DnDContext';
 
 type ModuleItemProps = {
     data: ModuleNodeType['data'];
@@ -9,13 +10,28 @@ type ModuleItemProps = {
 
 function ModuleItem({ data, isSearch }: ModuleItemProps) {
     const [ selected, setSelected ] = useState(false);
+    const { sidebarModules, setSidebarModules } = useDnD()
+
+    const handleClick = () => {
+        if (!data) return;
+        setSelected(!selected);
+
+        if (!selected) {
+            if (!sidebarModules.find((m) => m?.id === data.id)) {
+              setSidebarModules([...sidebarModules, data]);
+            }
+          } else {
+            setSidebarModules(sidebarModules.filter((m) => m?.id !== data.id));
+          }
+    }
 
     return (
         <div className={`module-item${selected ? '-active' : ''}`} 
             style={{ display: isSearch ? 'flex' : 'none' }}
-            onClick={()=> setSelected(!selected)} >
-            <p>{data.name}</p>
-            <small>{data.label}</small>
+            onClick={handleClick} 
+        >
+            <p>{data?.name}</p>
+            <small>{data?.label}</small>
         </div>
     );
 }
