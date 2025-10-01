@@ -8,23 +8,31 @@ Flowjomojo is a ReactFlow-based web-app that generates ready-made Nextflow/WDL p
 ### 1. Searching available modules
 Modules can be searched using the main search bar.
 
-![step 1](/src/assets/step1.png)
+<p align="center">
+  <img src="/src/assets/step1.png" alt="step 1" width="400" />
+</p>
 
 ### 2. Select / Drag and Drop modules to canvas
 Then we can select / unselect modules to be used. Selected modules will appear under modules library section.
 They can then be dragged and dropped to the main canvas.
 
-![step 2](/src/assets/step2.png)
+<p align="center">
+  <img src="/src/assets/step2.png" alt="step 2" width="400" />
+</p>
 
 ### 3. Build connection
 By default, the Top Handle of a Module Node is the target, and the Bottom Handle is the source. Connect source to target to create a connection between modules.
 
-![step 3](/src/assets/step3.png)
+<p align="center">
+  <img src="/src/assets/step3.png" alt="step 3" width="400" />
+</p>
 
 ### 4. Module editor
 Module's attributes can be changed in the Modules & Dependencies section.
 
-![step 4](/src/assets/step4.png)
+<p align="center">
+  <img src="/src/assets/step4.png" alt="step 4" width="400" />
+</p>
 
 
 ## Adding modules to Flowjomojo
